@@ -16,7 +16,7 @@ export class Tvheadend implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Tvheadend',
 		name: 'tvheadend',
-		icon: { light: 'file:tvheadend.svg', dark: 'file:tvheadend.svg' },
+		icon: { light: 'file:tvheadend.svg', dark: 'file:tvheadend.dark.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',

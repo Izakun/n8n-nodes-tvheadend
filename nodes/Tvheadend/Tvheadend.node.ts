@@ -69,7 +69,7 @@ export class Tvheadend implements INodeType {
 				).toString('base64');
 
 				const request = (url: string, qs?: IDataObject) =>
-					this.helpers.httpRequest({
+					this.helpers.httpRequestWithAuthentication.call(this, 'tvheadendApi', {
 						method: 'GET' as IHttpRequestMethods,
 						baseURL,
 						url,

@@ -1,4 +1,9 @@
-import { ICredentialType, INodeProperties } from 'n8n-workflow';
+import {
+	IAuthenticateGeneric,
+	ICredentialTestRequest,
+	ICredentialType,
+	INodeProperties,
+} from 'n8n-workflow';
 
 export class TvheadendApi implements ICredentialType {
 	name = 'tvheadendApi';
@@ -38,4 +43,23 @@ export class TvheadendApi implements ICredentialType {
 			description: 'Tvheadend password',
 		},
 	];
+
+	test: ICredentialTestRequest = {
+		request: {
+			method: 'GET',
+			baseURL: '={{$credentials.baseUrl}}',
+			url: '/api/serverinfo',
+			auth: {
+				username: '={{$credentials.username}}',
+				password: '={{$credentials.password}}',
+			},
+		},
+	};
+
+	// No transport auth to inject here (handled inside the node); this block
+	// lets the node use httpRequestWithAuthentication.
+	authenticate: IAuthenticateGeneric = {
+		type: 'generic',
+		properties: {},
+	};
 }

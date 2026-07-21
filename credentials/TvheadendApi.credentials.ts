@@ -30,8 +30,7 @@ export class TvheadendApi implements ICredentialType {
 			name: 'username',
 			type: 'string',
 			default: '',
-			required: true,
-			description: 'Tvheadend username',
+			description: 'Tvheadend username (leave empty if anonymous access is enabled)',
 		},
 		{
 			displayName: 'Password',
@@ -39,8 +38,7 @@ export class TvheadendApi implements ICredentialType {
 			type: 'string',
 			typeOptions: { password: true },
 			default: '',
-			required: true,
-			description: 'Tvheadend password',
+			description: 'Tvheadend password (leave empty if anonymous access is enabled)',
 		},
 	];
 
@@ -49,10 +47,6 @@ export class TvheadendApi implements ICredentialType {
 			method: 'GET',
 			baseURL: '={{$credentials.baseUrl}}',
 			url: '/api/serverinfo',
-			auth: {
-				username: '={{$credentials.username}}',
-				password: '={{$credentials.password}}',
-			},
 		},
 	};
 

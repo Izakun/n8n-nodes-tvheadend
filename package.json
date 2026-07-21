@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-tvheadend",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "n8n community node for Tvheadend (TV streaming server/DVR) via its API",
   "keywords": [
     "n8n-community-node-package",

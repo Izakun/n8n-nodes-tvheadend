@@ -64,9 +64,14 @@ export class Tvheadend implements INodeType {
 				const param = <T>(name: string, fallback?: T) =>
 					this.getNodeParameter(name, i, fallback as T) as T;
 
-				const basic = Buffer.from(
-					`${credentials.username}:${credentials.password}`,
-				).toString('base64');
+				// Only send Basic auth when credentials are provided; Tvheadend rejects an
+				// empty Basic header (401) but allows anonymous access when none is sent.
+				const headers: IDataObject = {};
+				if (credentials.username || credentials.password) {
+					headers.Authorization = `Basic ${Buffer.from(
+						`${credentials.username}:${credentials.password}`,
+					).toString('base64')}`;
+				}
 
 				const request = (url: string, qs?: IDataObject) =>
 					this.helpers.httpRequestWithAuthentication.call(this, 'tvheadendApi', {
@@ -74,7 +79,7 @@ export class Tvheadend implements INodeType {
 						baseURL,
 						url,
 						qs,
-						headers: { Authorization: `Basic ${basic}` },
+						headers,
 						json: true,
 					} as IHttpRequestOptions);
 
